@@ -27,9 +27,6 @@ while [ "${#}" -gt 0 ]; do
     shift
 done
 
-[ -f "${MY_DIR}/Module.symvers" ] || touch "${MY_DIR}/Module.symvers"
-[ -f "${MY_DIR}/System.map" ] || touch "${MY_DIR}/System.map"
-
 # Check if dump is specified and exists
 if [ -z "${DUMP}" ]; then
     echo "Please specify the dump!"
@@ -47,8 +44,8 @@ if ${EXTRACT_KERNEL}; then
     ${SRC_ROOT}/system/tools/mkbootimg/unpack_bootimg.py \
         --boot_img "${DUMP}/boot.img" \
         --out "${TMP_DIR}/boot.out" > /dev/null
-    cp -f "${TMP_DIR}/boot.out/kernel" ${MY_DIR}/Image
-    echo "  - Image"
+    cp -f "${TMP_DIR}/boot.out/kernel" ${MY_DIR}/kernel
+    echo "  - kernel"
 fi
 
 ### DTBS
